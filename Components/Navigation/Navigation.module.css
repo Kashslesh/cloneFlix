@@ -1,0 +1,33 @@
+.navigation {
+  height: 100vh;
+  width: 155px;
+  color: white;
+  background-color: #000;
+  opacity: 0.75;
+  z-index: 100;
+  position: fixed;
+}
+.navigation ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.navigation li {
+  margin: 1rem auto;
+}
+.navigation figure {
+  border-bottom: 4px solid transparent;
+}
+.navigation figure:hover {
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  transition: 0.3s ease;
+  border-bottom: 4px solid #b81d24;
+}
+.navigation nav {
+  height: 100%;
+}

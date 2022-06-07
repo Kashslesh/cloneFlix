@@ -1,0 +1,28 @@
+.carousel {
+  margin: 20px auto;
+  padding: 0 3%;
+  width: 97%;
+  position: relative;
+  color: #fff;
+  display: block;
+  text-align: center;
+}
+.carousel figure {
+  margin: 0 10px;
+}
+.carousel figcaption {
+  margin-top: 5px;
+}
+.carousel img {
+  width: 85%;
+  margin: 0 auto;
+}
+.carousel article {
+  text-align: start;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+}
+.carousel figcaption {
+  margin-top: 2px;
+}
