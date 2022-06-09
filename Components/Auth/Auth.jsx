@@ -4,36 +4,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 import classes from './Auth.module.css';
 const Auth = () => {
+  let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
 
-    let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
-
-    let img_url = 'https://image.tmdb.org/t/p/w500';
-    let original_img_url = 'https://image.tmdb.org/t/p/original';
-    let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
-    let movie_genres_http = 'https://api.themoviedb.org/3/discover/movie?';
-    let movie_detail_http = 'https://api.themoviedb.org/3/movie';
-
-    const fetchRequest = await fetch(`${genres_list_http}api_key=${api_key}`);
-    let fetchGenres = await fetchRequest.json();
-    const results = await Promise.allSettled(
-      fetchGenres.genres.forEach((item) => {
-        let page = Math.floor(Math.random() * 3) + 1;
-        fetch(`${movie_genres_http}api_key=${api_key}&with_genres=${item.id}&page=${page}`)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            return {
-              data: data,
-            };
-          });
-      }),
-    );
-    return results;
-    // let test = await fetchMoviesFunction(movie_genres_http, api_key, fetchGenres.genres[0].id);
-  }
+  let img_url = 'https://image.tmdb.org/t/p/w500';
+  let original_img_url = 'https://image.tmdb.org/t/p/original';
+  let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
   let movie_genres_http = 'https://api.themoviedb.org/3/discover/movie?';
-
+  let movie_detail_http = 'https://api.themoviedb.org/3/movie';
   async function getData(url) {
     let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
     let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
