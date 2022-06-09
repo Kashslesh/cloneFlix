@@ -78,78 +78,7 @@ export const getStaticProps = async () => {
   //       notFound: true,
   //     };
   //   });
-  // const movies = [
-  //   {
-  //     id: 1,
-  //     image:
-  //       'https://img4.goodfon.ru/wallpaper/big/0/96/gory-ozero-most-dal-shirokoformatnye-hdr-ultra-hd-voda.jpg',
-  //     imageBg: '/images/slide1b.webp',
-  //     title: '1983',
-  //   },
-  //   {
-  //     id: 2,
-  //     image:
-  //       'https://img4.goodfon.ru/wallpaper/big/6/59/reka-osen-reka-v-gorakh-reka-v-lesu-kamni-vodopad-voda-les-h.jpg',
-  //     imageBg: '/images/slide2b.webp',
-  //     title: 'Russian doll',
-  //   },
-  //   {
-  //     id: 3,
-  //     image:
-  //       'https://img4.goodfon.ru/wallpaper/big/3/cb/reka-osen-reka-v-gorakh-reka-v-lesu-kamni-vodopad-voda-les-1.jpg',
-  //     imageBg: '/images/slide3b.webp',
-  //     title: 'The rain',
-  //   },
-  //   {
-  //     id: 4,
-  //     image:
-  //       'https://img5.goodfon.ru/wallpaper/big/7/e3/sobaka-frantsuzskii-buldog-buldog-kravat-vzgl.jpg',
-  //     imageBg: '/images/slide4b.webp',
-  //     title: 'Sex education',
-  //   },
-  //   {
-  //     id: 5,
-  //     image:
-  //       'https://img3.goodfon.ru/wallpaper/big/d/33/wallpaper-4k-roof-bold-lines-mountain-futuristic-look-comfor.jpg',
-  //     imageBg: '/images/slide5b.webp',
-  //     title: 'Elite',
-  //   },
-  //   {
-  //     id: 6,
-  //     image:
-  //       'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
-  //     imageBg: '/images/slide6b.webp',
-  //     title: 'Black mirror',
-  //   },
-  //   {
-  //     id: 6,
-  //     image:
-  //       'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
-  //     imageBg: '/images/slide6b.webp',
-  //     title: 'Black mirror',
-  //   },
-  //   {
-  //     id: 6,
-  //     image:
-  //       'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
-  //     imageBg: '/images/slide6b.webp',
-  //     title: 'Black mirror',
-  //   },
-  //   {
-  //     id: 6,
-  //     image:
-  //       'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
-  //     imageBg: '/images/slide6b.webp',
-  //     title: 'Black mirror',
-  //   },
-  //   {
-  //     id: 6,
-  //     image:
-  //       'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
-  //     imageBg: '/images/slide6b.webp',
-  //     title: 'Black mirror',
-  //   },
-  // ];
+
   if (!fetchGenres) {
     return {
       notFound: true,
@@ -159,15 +88,83 @@ export const getStaticProps = async () => {
     props: {movies: test},
   };
 };
-const MainPage = ({movies}) => {
-  console.log(movies);
+const MainPage = () => {
+  const movies = [
+    {
+      id: 1,
+      image:
+        'https://img4.goodfon.ru/wallpaper/big/0/96/gory-ozero-most-dal-shirokoformatnye-hdr-ultra-hd-voda.jpg',
+      imageBg: '/images/slide1b.webp',
+      title: '1983',
+    },
+    {
+      id: 2,
+      image:
+        'https://img4.goodfon.ru/wallpaper/big/6/59/reka-osen-reka-v-gorakh-reka-v-lesu-kamni-vodopad-voda-les-h.jpg',
+      imageBg: '/images/slide2b.webp',
+      title: 'Russian doll',
+    },
+    {
+      id: 3,
+      image:
+        'https://img4.goodfon.ru/wallpaper/big/3/cb/reka-osen-reka-v-gorakh-reka-v-lesu-kamni-vodopad-voda-les-1.jpg',
+      imageBg: '/images/slide3b.webp',
+      title: 'The rain',
+    },
+    {
+      id: 4,
+      image:
+        'https://img5.goodfon.ru/wallpaper/big/7/e3/sobaka-frantsuzskii-buldog-buldog-kravat-vzgl.jpg',
+      imageBg: '/images/slide4b.webp',
+      title: 'Sex education',
+    },
+    {
+      id: 5,
+      image:
+        'https://img3.goodfon.ru/wallpaper/big/d/33/wallpaper-4k-roof-bold-lines-mountain-futuristic-look-comfor.jpg',
+      imageBg: '/images/slide5b.webp',
+      title: 'Elite',
+    },
+    {
+      id: 6,
+      image:
+        'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
+      imageBg: '/images/slide6b.webp',
+      title: 'Black mirror',
+    },
+    {
+      id: 6,
+      image:
+        'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
+      imageBg: '/images/slide6b.webp',
+      title: 'Black mirror',
+    },
+    {
+      id: 6,
+      image:
+        'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
+      imageBg: '/images/slide6b.webp',
+      title: 'Black mirror',
+    },
+    {
+      id: 6,
+      image:
+        'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
+      imageBg: '/images/slide6b.webp',
+      title: 'Black mirror',
+    },
+    {
+      id: 6,
+      image:
+        'https://img1.goodfon.ru/wallpaper/big/a/91/stick-weapon-actor-gun-martial-artist-film-cinema-fight-man.jpg',
+      imageBg: '/images/slide6b.webp',
+      title: 'Black mirror',
+    },
+  ];
   return (
     <Layout>
       <Card>
-        {/* <Carousel movies={movies} />
         <Carousel movies={movies} />
-        <Carousel movies={movies} />
-        <Carousel movies={movies} /> */}
       </Card>
     </Layout>
   );

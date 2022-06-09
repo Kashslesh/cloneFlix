@@ -4,7 +4,10 @@ import Image from 'next/image';
 import Slider from 'react-slick';
 import classes from './Carousel.module.css';
 
-const Carousel = ({movies}) => {
+const Carousel = (props) => {
+  const myLoader = ({src}) => {
+    return src.image;
+  };
   const settings = {
     dots: false,
     infinite: true,
@@ -19,11 +22,20 @@ const Carousel = ({movies}) => {
         <h2>Test</h2>
       </article>
       <Slider {...settings}>
-        {movies.map(({id, title, image}) => (
-          <Link key={id} href={`/${id}`} passHref>
+        {props.movies.map((item) => (
+          <Link key={item.id} href={`/${item.id}`} passHref>
             <figure>
-              <Image src={image} alt={image} />
-              <figcaption>{title}</figcaption>
+              <Image
+                quality={75}
+                layout="fill"
+                src={item.image}
+                alt={item.image}
+                placeholder="blur"
+                objectFit="contain"
+                blurDataURL
+                loader={myLoader}
+              />
+              <figcaption>{item.title}</figcaption>
             </figure>
           </Link>
         ))}
