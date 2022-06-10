@@ -4,34 +4,35 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 import classes from './Auth.module.css';
 const Auth = () => {
-  let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
+  // let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
 
-  let img_url = 'https://image.tmdb.org/t/p/w500';
-  let original_img_url = 'https://image.tmdb.org/t/p/original';
-  let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
-  let movie_genres_http = 'https://api.themoviedb.org/3/discover/movie?';
-  let movie_detail_http = 'https://api.themoviedb.org/3/movie';
-  async function getData(url) {
-    let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
-    let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
-    let page = Math.floor(Math.random() * 3) + 1;
-    const fetchRequest = await fetch(`${genres_list_http}api_key=${api_key}`);
-    let fetchGenres = await fetchRequest.json();
-    const arrOfPromises = fetchGenres.genres.map((item) =>
-      fetch(`${url}api_key=${api_key}&with_genres=${item.id}&page=${page}`).then((response) =>
-        response.json(),
-      ),
-    );
+  // let img_url = 'https://image.tmdb.org/t/p/w500';
+  // let original_img_url = 'https://image.tmdb.org/t/p/original';
+  // let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
+  // let movie_genres_http = 'https://api.themoviedb.org/3/discover/movie?';
+  // let movie_detail_http = 'https://api.themoviedb.org/3/movie';
+  // async function getData(url) {
+  //   let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
+  //   let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
+  //   let page = Math.floor(Math.random() * 3) + 1;
+  //   const fetchRequest = await fetch(`${genres_list_http}api_key=${api_key}`);
+  //   let fetchGenres = await fetchRequest.json();
+  //   const arrOfPromises = fetchGenres.genres.map((item) =>
+  //     fetch(`${url}api_key=${api_key}&with_genres=${item.id}&page=${page}`).then((response) =>
+  //       response.json(),
+  //     ),
+  //   );
 
-    return Promise.allSettled(arrOfPromises);
-  }
-  const list = getData(movie_genres_http).then((data) => {
-    const listOfMovies = data.map((item) => {
-      console.log(item.value.results);
-    });
-    return listOfMovies;
-  });
-  console.log(list);
+  //   return Promise.allSettled(arrOfPromises).then((data) => {
+  //     const listOfMovies = data.map((item) => {
+  //       const data = item.value.results;
+  //       return data;
+  //     });
+  //     console.log(listOfMovies);
+  //   });
+  // }
+  // const list = getData(movie_genres_http);
+  
 
   const dispatch = useDispatch();
   const router = useRouter();
