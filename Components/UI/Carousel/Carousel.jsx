@@ -5,37 +5,42 @@ import Slider from 'react-slick';
 import classes from './Carousel.module.css';
 
 const Carousel = (props) => {
-  const myLoader = ({src}) => {
-    return src.image;
-  };
+  const {genres, results} = props.movies;
+
+  let img_url = 'https://image.tmdb.org/t/p/w500';
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 900,
     accessibility: true,
-    slidesToShow: 5,
-    slidesToScroll: 3,
+    slidesToShow: 6,
+    slidesToScroll: 4,
   };
   return (
     <section className={classes.carousel}>
       <article>
-        <h2>Test</h2>
+        <h2>{genres.name || 'Action'}</h2>
       </article>
       <Slider {...settings}>
-        {props.movies.map((item) => (
-          <Link key={item.id} href={`/${item.id}`} passHref>
+        {results.map((movie) => (
+          <Link key={movie.id} href={`/${movie.id}`} passHref>
             <figure>
               <Image
-                quality={75}
-                layout="fill"
-                src={item.image}
-                alt={item.image}
+                quality={85}
+                width={300}
+                height={500}
+                src={img_url.split(' ') + movie.poster_path}
+                alt={movie.original_title}
                 placeholder="blur"
                 objectFit="contain"
                 blurDataURL
-                loader={myLoader}
+                unoptimized
+                loader={() => {
+                  return `${img_url.split(' ') + movie.poster_path}`;
+                }}
               />
-              <figcaption>{item.title}</figcaption>
+              <figcaption>{movie.title}</figcaption>
             </figure>
           </Link>
         ))}
@@ -43,12 +48,5 @@ const Carousel = (props) => {
     </section>
   );
 };
-// export async function getStaticProps() {
-//   return {
-//     props: {
-//       moviesObj: movies,
-//     },
-//     revalidate: 1,
-//   };
-// }
+
 export default React.memo(Carousel);
