@@ -3,13 +3,12 @@ import React from 'react';
 import Card from '../../Components/UI/Card/Card';
 import Carousel from '../../Components/UI/Carousel/Carousel';
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
 
   let original_img_url = 'https://image.tmdb.org/t/p/original';
   let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
   let movie_genres_http = 'https://api.themoviedb.org/3/discover/movie?';
-  let movie_detail_http = 'https://api.themoviedb.org/3/movie';
 
   const fetchRequest = await fetch(`${genres_list_http}api_key=${api_key}`);
   const fetchGenres = await fetchRequest.json();
@@ -44,20 +43,18 @@ export const getStaticProps = async () => {
       notFound: true,
     };
   }
-  const test = dataList[0];
   return {
     props: {movies: dataList},
   };
 };
 const MainPage = ({movies}) => {
-  console.log(movies);
   return (
     <Layout>
-      <Card>
-        {movies.map((item) => (
-          <Carousel key={item.genres.id} movies={item} />
-        ))}
-      </Card>
+      {movies.map((item) => (
+        <Card key={item.genres.id}>
+          <Carousel movies={item} />
+        </Card>
+      ))}
     </Layout>
   );
 };

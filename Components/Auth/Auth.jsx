@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {AuthActions} from '../../store/AuthSlices';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import classes from './Auth.module.css';
 const Auth = () => {

@@ -24,7 +24,7 @@ const Carousel = (props) => {
       </article>
       <Slider {...settings}>
         {results.map((movie) => (
-          <Link key={movie.id} href={`/${movie.id}`} passHref>
+          <Link key={movie.id} href={`/main-page/${movie.id}`}>
             <figure>
               <Image
                 quality={85}
