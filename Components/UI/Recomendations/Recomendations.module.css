@@ -1,0 +1,28 @@
+.recommendations {
+  margin-top: 5rem;
+  padding: 5rem;
+}
+.recommendations div {
+  display: block;
+}
+.recommendations h2 {
+  font-size: 30px;
+  line-height: 34px;
+  font-weight: 400;
+  color: #fff;
+}
+.recommendations ul {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  justify-items: center;
+}
+.recommendations li {
+  width: auto;
+  margin: 1.5rem 0 0 0;
+  padding: 0;
+}
+.recommendations img {
+  max-width: 100%;
+  margin: 0 auto;
+  margin: 6px;
+}

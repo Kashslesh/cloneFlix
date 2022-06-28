@@ -5,8 +5,6 @@ import Carousel from '../../Components/UI/Carousel/Carousel';
 
 export const getServerSideProps = async () => {
   let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
-
-  let original_img_url = 'https://image.tmdb.org/t/p/original';
   let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
   let movie_genres_http = 'https://api.themoviedb.org/3/discover/movie?';
 

@@ -1,12 +1,17 @@
 import React from 'react';
-import Card from '../../../Components/UI/Card/Card';
 import Layout from '../../../Components/Layout/Layout';
+import Recommendations from '../../../Components/UI/Recomendations/Recomendations';
+import TitleMovie from '../../../Components/UI/TitleMovie/TitleMovie';
 import classes from './Movie.module.css';
 let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
 let original_img_url = 'https://image.tmdb.org/t/p/original';
 export async function getServerSideProps({params}) {
   let movie_detail_http = 'https://api.themoviedb.org/3/movie';
   const request = await fetch(`${movie_detail_http}/${params.id}?api_key=${api_key}`);
+  const recommendations = await fetch(
+    `${movie_detail_http}/${params.id}/recommendations?api_key=${api_key}`,
+  );
+  const dataRecommendations = await recommendations.json();
   const data = await request.json();
   const img = original_img_url.slice(' ') + data.backdrop_path;
   if (!data) {
@@ -18,21 +23,23 @@ export async function getServerSideProps({params}) {
     props: {
       movie: data,
       img: img,
+      recommendation: dataRecommendations,
     },
   };
 }
 
-const MovieInfo = ({movie, img}) => {
-  console.log(movie);
+const MovieInfo = ({movie, img, recommendation}) => {
   if (!movie) {
     return <h2>Page is empty</h2>;
   } else {
     return (
       <Layout>
         <section style={{backgroundImage: `url(${img})`}} className={classes['section-main']}>
-          <p>{movie.title}</p>
+          <TitleMovie movieInfo={movie} />
         </section>
-        <section></section>
+        <section>
+          <Recommendations recommendations={recommendation} />
+        </section>
       </Layout>
     );
   }
