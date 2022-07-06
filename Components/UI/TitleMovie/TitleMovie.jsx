@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './TitleMovie.module.css';
 const TitleMovie = ({movieInfo}) => {
-  if (!movieInfo) {
+  if (movieInfo === undefined) {
     return (
       <div className={classes.container}>
         <div className={classes.title}>

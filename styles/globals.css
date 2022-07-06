@@ -52,7 +52,7 @@ input:focus {
   outline: none;
 }
 .container {
-  background: url('../Assets/FR-fr-20220418-popsignuptwoweeks-perspective_alpha_website_large.jpg')
+  background: url('../public/Assets/FR-fr-20220418-popsignuptwoweeks-perspective_alpha_website_large.jpg')
     no-repeat center;
   background-size: cover;
   height: 100vh;

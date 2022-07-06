@@ -76,6 +76,9 @@
 .lien {
   color: #737373;
 }
+.lien span {
+  color: #fff;
+}
 .toggle {
   color: #fff;
   cursor: pointer;

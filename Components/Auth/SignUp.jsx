@@ -1,12 +1,13 @@
 import {useState, useEffect} from 'react';
-import {AuthActions} from '../../store/AuthSlices';
 import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
+import {auth} from '../../store/FirebaseStore';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import classes from './Auth.module.css';
-const Auth = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [isSignIn, setIsSignIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
@@ -25,13 +26,20 @@ const Auth = () => {
   const [isDirtyConfirmation, setIsDirtyConfiramtion] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
 
+  const register = async (config, emailValue, passwordValue) => {
+    try {
+      const user = await createUserWithEmailAndPassword(config, emailValue, passwordValue);
+    
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    }
+    router.push('/signin');
+  };
   const resetFunction = () => {
     setEmail('');
     setConfirmation('');
     setPassword('');
-  };
-  const toggleHandler = () => {
-    setIsSignIn((prevState) => !prevState);
   };
   const blurHandler = (event) => {
     if (event.target.name === 'email') {
@@ -80,48 +88,23 @@ const Auth = () => {
   const checkedHandler = () => {
     setChecked(!checked);
   };
-  let storeLocal;
   useEffect(() => {
-    if (isSignIn) {
-      if (!localStorage.getItem('user')) {
-        return;
-      }
-      storeLocal = JSON.parse(localStorage.getItem('user'));
-      setEmail(storeLocal.email);
-      setPassword(storeLocal.password);
-      setChecked(true);
+    if (isEmailHasError || isPasswordHasError) {
+      setFormIsValid(false);
     } else {
-      localStorage.removeItem('user');
-      resetFunction();
+      setFormIsValid(true);
     }
-  }, [isSignIn]);
-  useEffect(() => {
-    if (isSignIn) {
-      if (isEmailHasError || isPasswordHasError) {
-        setFormIsValid(false);
-      } else {
-        setFormIsValid(true);
-      }
+    if (isEmailHasError || isPasswordHasError || confirmationError) {
+      setFormIsValid(false);
     } else {
-      if (isEmailHasError || isPasswordHasError || confirmationError) {
-        setFormIsValid(false);
-      } else {
-        setFormIsValid(true);
-      }
+      setFormIsValid(true);
     }
   }, [isEmailHasError, isPasswordHasError, confirmationError]);
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
-      if (!isSignIn) {
-        dispatch(AuthActions.signUp({email, password}));
-        setIsSignIn(true);
-        resetFunction();
-      } else {
-        dispatch(AuthActions.logIn({email, password}));
-        resetFunction();
-        router.push('/main-page');
-      }
+      register(auth, email, password);
+      resetFunction();
       if (checked) {
         localStorage.setItem('user', JSON.stringify({email, password}));
       }
@@ -131,7 +114,7 @@ const Auth = () => {
   return (
     <div className={classes.container}>
       <div className={classes.inner}>
-        <h2>{!isSignIn ? 'Sign up' : 'Sign In'}</h2>
+        <h2>Sign up</h2>
         <form onSubmit={submitHandler}>
           <input
             value={email}
@@ -154,7 +137,8 @@ const Auth = () => {
             name="password"
             type="password"
             placeholder="Password"
-          ></input>
+            autoComplete="off"
+          />
           {isDirtyPaswword && isPasswordHasError && (
             <span className={classes.errors}>
               <br />
@@ -162,28 +146,28 @@ const Auth = () => {
             </span>
           )}
           <br />
-          {!isSignIn && (
-            <label>
-              <input
-                onChange={confirmationHandler}
-                value={confirmation}
-                onBlur={blurHandler}
-                name="confirmation"
-                type="password"
-                placeholder="Confirmation"
-              ></input>
-              {isDirtyConfirmation && confirmationError && (
-                <span className={classes.errors}>
-                  <br />
-                  {confirmationError}
-                </span>
-              )}
-              <br />
-            </label>
-          )}
+          <label>
+            <input
+              onChange={confirmationHandler}
+              value={confirmation}
+              onBlur={blurHandler}
+              name="confirmation"
+              type="password"
+              autoComplete="off"
+              placeholder="Confirmation"
+            />
+            {isDirtyConfirmation && confirmationError && (
+              <span className={classes.errors}>
+                <br />
+                {confirmationError}
+              </span>
+            )}
+            <br />
+          </label>
+
           <br />
           <button disabled={!formIsValid} type="submit">
-            {!isSignIn ? 'Sign up' : 'Sign In'}
+            Sign up
           </button>
           <div className={classes.checkbox}>
             <label>
@@ -193,15 +177,14 @@ const Auth = () => {
             <p>Need help?</p>
           </div>
           <label htmlFor="toggle" className={classes.lien}>
-            New to Cloneflix?
-            <span id="toggle" className={classes.toggle} onClick={toggleHandler}>
-              {' '}
-              Sign up now.
-            </span>
+            New to Cloneflix?{' '}
+            <Link href="/signin">
+              <span>Sign in now.</span>
+            </Link>
           </label>
         </form>
       </div>
     </div>
   );
 };
-export default Auth;
+export default SignUp;

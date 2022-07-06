@@ -3,6 +3,7 @@ import Layout from '../../../Components/Layout/Layout';
 import Recommendations from '../../../Components/UI/Recomendations/Recomendations';
 import TitleMovie from '../../../Components/UI/TitleMovie/TitleMovie';
 import classes from './Movie.module.css';
+import imageFake from '../../../public/Assets/movie-error.png';
 let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
 let original_img_url = 'https://image.tmdb.org/t/p/original';
 export async function getServerSideProps({params}) {
@@ -13,7 +14,14 @@ export async function getServerSideProps({params}) {
   );
   const dataRecommendations = await recommendations.json();
   const data = await request.json();
-  const img = original_img_url.slice(' ') + data.backdrop_path;
+  let img;
+  if (data.backdrop_path === null && data.poster_path === null) {
+    img = imageFake.src;
+  } else if (data.poster_path !== null) {
+    img = original_img_url.slice(' ') + data.backdrop_path;
+  } else {
+    img = original_img_url.slice(' ') + data.poster_path;
+  }
   if (!data) {
     return {
       notFound: true,

@@ -14,27 +14,33 @@ const Recommendations = ({recommendations}) => {
         <h2>More Like This</h2>
       </div>
       <ul>
-        {results.map((movie) => (
-          <Link key={movie.id} href={`/main-page/${movie.id}`}>
-            <li>
-              {' '}
-              <Image
-                quality={85}
-                width={300}
-                height={500}
-                src={original_img_url.split(' ') + movie.poster_path}
-                alt={movie.original_title}
-                placeholder="blur"
-                objectFit="contain"
-                blurDataURL
-                unoptimized
-                loader={() => {
-                  return `${original_img_url.split(' ') + movie.poster_path}`;
-                }}
-              />
-            </li>
-          </Link>
-        ))}
+        {results.map((movie) => {
+          if (movie.title === 'Il re del bosco: il porcino') {
+            return;
+          } else {
+            return (
+              <Link key={movie.id} href={`/main-page/${movie.id}`}>
+                <li>
+                  {' '}
+                  <Image
+                    quality={85}
+                    width={300}
+                    height={500}
+                    src={original_img_url.split(' ') + movie.poster_path}
+                    alt={movie.original_title}
+                    placeholder="blur"
+                    objectFit="contain"
+                    blurDataURL
+                    unoptimized
+                    loader={() => {
+                      return `${original_img_url.split(' ') + movie.poster_path}`;
+                    }}
+                  />
+                </li>
+              </Link>
+            );
+          }
+        })}
       </ul>
     </section>
   );
