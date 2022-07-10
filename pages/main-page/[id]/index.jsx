@@ -45,9 +45,7 @@ const MovieInfo = ({movie, img, recommendation}) => {
         <section style={{backgroundImage: `url(${img})`}} className={classes['section-main']}>
           <TitleMovie movieInfo={movie} />
         </section>
-        <section>
-          <Recommendations recommendations={recommendation} />
-        </section>
+        <section>{recommendation && <Recommendations recommendations={recommendation} />}</section>
       </Layout>
     );
   }
