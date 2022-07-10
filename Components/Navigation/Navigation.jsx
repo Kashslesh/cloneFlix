@@ -43,7 +43,7 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/search">
               <figure>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
               </figure>
