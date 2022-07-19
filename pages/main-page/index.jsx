@@ -2,8 +2,16 @@ import Layout from '../../Components/Layout/Layout';
 import React from 'react';
 import Card from '../../Components/UI/Card/Card';
 import Carousel from '../../Components/UI/Carousel/Carousel';
+import dynamic from 'next/dynamic';
+import {Suspense} from 'react';
 
 export const getServerSideProps = async () => {
+  // const DynamicHeader = dynamic(() => import('../../public/favicon.ico'), {
+  //   loading: () => <header />,
+  // });
+  // <Suspense fallback={`Loading...`}>
+  //   <DynamicHeader />
+  // </Suspense>;
   let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
   let genres_list_http = 'https://api.themoviedb.org/3/genre/movie/list?';
   let movie_genres_http = 'https://api.themoviedb.org/3/discover/movie?';

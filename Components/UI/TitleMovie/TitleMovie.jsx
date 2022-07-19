@@ -9,13 +9,7 @@ import config from 'react-reveal/globals';
 import classes from './TitleMovie.module.css';
 const TitleMovie = ({movieInfo}) => {
   if (movieInfo === undefined) {
-    return (
-      <div className={classes.container}>
-        <div className={classes.title}>
-          <h1>Not found</h1>
-        </div>
-      </div>
-    );
+    return;
   }
   config({ssrFadeout: true});
   const {title, production_companies, budget, runtime, release_date, genres, overview} = movieInfo;

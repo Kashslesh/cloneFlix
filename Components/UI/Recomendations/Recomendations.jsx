@@ -11,7 +11,7 @@ const Recommendations = ({recommendations}) => {
   const {results} = recommendations;
   let original_img_url = 'https://image.tmdb.org/t/p/original';
   if (!results) {
-    return <p>Not found</p>;
+    return;
   }
   return (
     <section className={classes.recommendations}>

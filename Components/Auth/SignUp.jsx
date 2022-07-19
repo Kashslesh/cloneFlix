@@ -178,7 +178,7 @@ const SignUp = () => {
           </div>
           <label htmlFor="toggle" className={classes.lien}>
             New to Cloneflix?{' '}
-            <Link href="/signin">
+            <Link href="/">
               <span>Sign in now.</span>
             </Link>
           </label>
