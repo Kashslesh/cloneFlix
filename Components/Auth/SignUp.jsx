@@ -2,8 +2,6 @@ import {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
-import {auth} from '../../store/FirebaseStore';
-import {createUserWithEmailAndPassword} from 'firebase/auth';
 import classes from './Auth.module.css';
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -26,15 +24,19 @@ const SignUp = () => {
   const [isDirtyConfirmation, setIsDirtyConfiramtion] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const register = async (config, emailValue, passwordValue) => {
-    try {
-      const user = await createUserWithEmailAndPassword(config, emailValue, passwordValue);
-    
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+  const registration = async (email, password) => {
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify({email, password}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || 'Something went wrong');
     }
-    router.push('/signin');
+    return data;
   };
   const resetFunction = () => {
     setEmail('');
@@ -100,15 +102,22 @@ const SignUp = () => {
       setFormIsValid(true);
     }
   }, [isEmailHasError, isPasswordHasError, confirmationError]);
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     if (formIsValid) {
-      register(auth, email, password);
       resetFunction();
       if (checked) {
         localStorage.setItem('user', JSON.stringify({email, password}));
       }
     }
+
+    try {
+      const result = await registration(email, password);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   return (
@@ -178,7 +187,7 @@ const SignUp = () => {
           </div>
           <label htmlFor="toggle" className={classes.lien}>
             New to Cloneflix?{' '}
-            <Link href="/">
+            <Link href="/" passHref>
               <span>Sign in now.</span>
             </Link>
           </label>

@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react';
-import {auth} from '../../store/FirebaseStore';
-import {signInWithEmailAndPassword} from 'firebase/auth';
 import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
+import {signIn} from 'next-auth/react';
 import classes from './Auth.module.css';
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -21,15 +20,6 @@ const SignIn = () => {
   const [isDirtyPaswword, setIsDirtyPassword] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const login = async (config, emailValue, passwordValue) => {
-    try {
-      const user = await signInWithEmailAndPassword(config, emailValue, passwordValue);
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    }
-    router.push('/main-page');
-  };
   const resetFunction = () => {
     setEmail('');
     setPassword('');
@@ -85,10 +75,17 @@ const SignIn = () => {
       setFormIsValid(true);
     }
   }, [isEmailHasError, isPasswordHasError]);
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     if (formIsValid) {
-      login(auth, email, password);
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: email,
+        password: password,
+      });
+      if (result.ok) {
+        router.push('/main-page');
+      }
       resetFunction();
 
       if (checked) {
@@ -144,7 +141,7 @@ const SignIn = () => {
           </div>
           <label htmlFor="toggle" className={classes.lien}>
             New to Cloneflix?{' '}
-            <Link href="/signup">
+            <Link href="/signup" passHref>
               <span>Sign up now.</span>
             </Link>
           </label>

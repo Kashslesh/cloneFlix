@@ -1,9 +1,8 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import Recomendations from '../UI/Recomendations/Recomendations';
 import Card from '../UI/Card/Card';
 import BtnRed from '../UI/Buttons/BtnRed';
 import classes from './Search.module.css';
-import {async} from '@firebase/util';
 const Search = () => {
   let api_key = 'a91ae0cd304a8451a56aa5198ff1fa0a';
   const [movie, setMovie] = useState('');
@@ -21,7 +20,6 @@ const Search = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     fetchData(movie);
-    console.log(results);
   };
   return (
     <Card className={classes.card}>

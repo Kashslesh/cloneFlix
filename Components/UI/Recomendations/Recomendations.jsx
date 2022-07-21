@@ -31,7 +31,7 @@ const Recommendations = ({recommendations}) => {
               imgSrs = original_img_url.slice(' ') + movie.poster_path;
             }
             return (
-              <Link key={movie.id} href={`/main-page/${movie.id}`}>
+              <Link key={movie.id} href={`/main-page/${movie.id}`} passHref>
                 <li>
                   {' '}
                   <Image
